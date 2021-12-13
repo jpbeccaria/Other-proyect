@@ -1,13 +1,12 @@
-\ Magazine Training
-\
-\    Entrena a los animales a utilizar el hole central de la jaula,
-\que ahi se entrega y se va a buscar el aliento.
-\    Entrega un primer pellet a los 5". Solo si el animal va a buscar el pellet,
-\comienza un contador que libera un siguiente pellet en aproximadamente 60 segundos (entre 50 y 70).
-\    Duración de la sesión 45 minutos. Para modificarlo ir a S.S.8 y leer ahí como se cambia.
+\ Magazine Training by Juan Pablo Beccaria
+\ 
+\  
+\ Pretty simple but useful protocol. Compatible as day zero of any task that requires food as reward.
 
-\Cambios de la V2: Se modifico los Z que estaban mal escritos, Z^Magazine paso a ser Z^Recompenza y al revez.
-\Se supone que ahora, tambien,  el SoftCR registra correctamente las head entry
+\ It trains animals to understand that the magazine port located into de chamber may deliver food. 
+\ For that, food delivery is going to be turn on every 30 â€“ 60 seg (mean 45 sec) ONLY if the animal take pellet previously delivered. 
+
+\ Test duration 45 minutes.
 
 
 \ OUTPUTs
@@ -19,12 +18,12 @@
 \ INPUT
 ^MagazineHole = 3
 \
-\ A= número de Magazine pokes
-\ B= número de recomenpenzas
+\ A= nÃºmero de Magazine pokes
+\ B= nÃºmero de recomenpenzas
 \
-^Recompenza = 1 \ Z^Recompenza señal para contar las recompenzas
-^Magazine = 2   \ Z^Magazine señal para contar M pokes
-^End = 3        \ para Z^End, señal para finalizar la sesión
+^Recompenza = 1 \ Z^Recompenza seÃ±al para contar las recompenzas
+^Magazine = 2   \ Z^Magazine seÃ±al para contar M pokes
+^End = 3        \ para Z^End, seÃ±al para finalizar la sesiÃ³n
 
 ^CArraySize = 10000
 DIM C = 10000
