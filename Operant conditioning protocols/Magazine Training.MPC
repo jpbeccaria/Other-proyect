@@ -1,0 +1,240 @@
+\ Magazine Training
+\
+\    Entrena a los animales a utilizar el hole central de la jaula,
+\que ahi se entrega y se va a buscar el aliento.
+\    Entrega un primer pellet a los 5". Solo si el animal va a buscar el pellet,
+\comienza un contador que libera un siguiente pellet en aproximadamente 60 segundos (entre 50 y 70).
+\    Duración de la sesión 45 minutos. Para modificarlo ir a S.S.8 y leer ahí como se cambia.
+
+\Cambios de la V2: Se modifico los Z que estaban mal escritos, Z^Magazine paso a ser Z^Recompenza y al revez.
+\Se supone que ahora, tambien,  el SoftCR registra correctamente las head entry
+
+
+\ OUTPUTs
+^Luz = 7
+^LuzI = 1
+^LuzD = 2
+^Pellet = 3
+\
+\ INPUT
+^MagazineHole = 3
+\
+\ A= número de Magazine pokes
+\ B= número de recomenpenzas
+\
+^Recompenza = 1 \ Z^Recompenza señal para contar las recompenzas
+^Magazine = 2   \ Z^Magazine señal para contar M pokes
+^End = 3        \ para Z^End, señal para finalizar la sesión
+
+^CArraySize = 10000
+DIM C = 10000
+
+Var_Alias Duracion de secion (min)    = U  \ Default = 45
+
+LIST Z =  50, 52.5, 55, 57.5, 60, 62.5, 65, 67.5, 70
+
+
+
+\--------------------------------------------------------
+
+S.S.1,
+S1,
+
+0.01": SET U = 45 ---> S2
+
+S2,
+
+    #START: ON ^Luz, ^LuzI, ^LuzD ---> S3
+
+S3,
+    5": ON  ^Pellet; SET B=1 ---> S4
+
+S4,
+    0.05": OFF ^Pellet ---> S5
+
+S5,
+    #R3  : Z^Magazine; RANDD Y = Z;
+           SET Y = Y * 1" ---> S6
+
+
+S6,
+    Y#T: ON ^Pellet ; Z^Recompenza ---> S7
+    #Z^End:---> S2
+
+S7,
+    0.05": OFF ^Pellet ---> S5
+
+\-------------------------------------------------------
+
+S.S.2,
+S1,
+    #START: ---> S2
+
+S2,
+    #R3: ADD A ---> S3
+
+    #Z^End: ---> S1
+S3,
+0.15": ---> S2
+\---------------------------------------------------------
+
+S.S.3,
+S1,
+    #START: ---> S2
+
+S2,
+
+    #Z^Recompenza: ADD B ---> SX
+
+    #Z^End: ---> S1
+
+\----------------------------------------------------------
+
+S.S.4,
+
+
+S1,
+    #START: ---> S2
+
+S2,
+    0.01": ADD T ---> SX
+    #Z^End: ---> S1
+
+
+\----------------------------------------------------------
+\Info para el SoftCR, para que grafique toodas las entradas de cabeza.
+S.S.5,
+S1,
+    #START: ---> S2
+
+S2,
+    #R3: IF I <= ^CArraySize [@True, @False]
+                   @True: SET C(I) = T + 0.10, T = 0; ADD I;
+                          IF I <= ^CArraySize [@True, @False]
+                             @True: SET C(I) = -987.987 ---> SX
+                             @False: ---> S1
+                   @False: ---> S1
+
+\----------------------------------------------------------
+\ Info para el SoftCR, para que grafique las recompenzas
+S.S.6,
+S1,
+    #START: ---> S2
+
+S2,
+    #Z^Recompenza: IF I <= ^CArraySize [@True, @False]
+                   @True: SET C(I) = T + 0.12, T = 0; ADD I;
+                          IF I <= ^CArraySize [@True, @False]
+                             @True: SET C(I) = -987.987 ---> SX
+                             @False: ---> S1
+                   @False: ---> S1
+
+\----------------------------------------------------------
+\ Info para el SoftCR, para que grafique SOLO las entradas de cabeza QUE DAN LUGAR A RECOMPENZA!
+S.S.7,
+S1,
+    #START: ---> S2
+
+S2,
+    #Z^Magazine: IF I <= ^CArraySize [@True, @False]
+                   @True: SET C(I) = T + 0.11, T = 0; ADD I;
+                          IF I <= ^CArraySize [@True, @False]
+                             @True: SET C(I) = -987.987 ---> SX
+                             @False: ---> S1
+                   @False: ---> S1
+
+\----------------------------------------------------------
+
+\ Info para el SoftCR, para que grafique los NP izq
+S.S.8,
+S1,
+    #START: ---> S2
+
+S2,
+    #R1: IF I <= ^CArraySize [@True, @False]
+                   @True: SET C(I) = T + 0.13, T = 0; ADD I;
+                          IF I <= ^CArraySize [@True, @False]
+                             @True: SET C(I) = -987.987 ---> SX
+                             @False: ---> S1
+                   @False: ---> S1
+
+\---------------------------------------------------------
+\ Info para el SoftCR, para que grafique los NP derechos.
+
+S.S.9,
+S1,
+    #START: ---> S2
+
+S2,
+    #R2: IF I <= ^CArraySize [@True, @False]
+                   @True: SET C(I) = T + 0.14, T = 0; ADD I;
+                          IF I <= ^CArraySize [@True, @False]
+                             @True: SET C(I) = -987.987 ---> SX
+                             @False: ---> S1
+                   @False: ---> S1
+
+\---------------------------------------------------------
+
+S.S.10,
+S1,
+    #START: ---> S2
+S2,
+    #R1: ADD F; SHOW 4, NP Izq, F ---> S3
+
+
+
+    #R2: ADD G; SHOW 5, NP Der, G ---> S3
+
+    #Z^End: ---> S1
+
+S3,
+0.15": ---> S2
+
+\----------------------------------------------------------
+
+
+
+S.S.11,
+S1,
+    #START: SHOW 2, Magazine Pokes, A, 3, Recompenzas, B,
+    4, NP Izq, F, 5, NP Der, G---> S2
+
+S2,
+    1": SHOW 2, Magazine Pokes, A, 3, Recompenzas, B,
+    4, NP Izq, F, 5, NP Der, G ---> S2
+
+
+S.S.12,
+
+S1,
+
+#START: ---> S2
+
+S2,
+
+0.01": SET U= U*60; SET U = U*1" ---> S3
+
+S3,
+
+U#T: Z^End ---> S1
+
+
+\***************************************************
+\                   SESSION CLOCK
+\***************************************************
+
+
+
+S.S.13,
+S1,
+  #START: SHOW 1,Session,S/60 ---> S2
+
+S2,
+  1": ADD S; SHOW 1,Session,S/60;
+      IF S/60 >= 45 [@EndSession, @ContinueTiming]
+         @End: Z^End ---> S3
+         @Cont: ---> SX
+  #Z^End: ---> S3
+
+S3,
+ 2": ---> STOPABORTFLUSH
