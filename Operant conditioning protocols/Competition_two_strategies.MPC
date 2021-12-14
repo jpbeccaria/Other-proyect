@@ -1,19 +1,9 @@
-\ Protocolo basado en medlab8 fixed ratio by Juan P Luz corr sin castigo V2 que a su vez se basa en MEDLab8 Fixed Ratio.mpc
-
-
-\ Cambios de la V3: Cambios porque los animales no trnasicionaban a alternar, siempre seguian la luz aun con
-\ sobreentrenamiento.
-\ - Ahora por defecto, la luz alterna (perfil 3), si se quiere se puede poner el 1 o el 2 pero probablemente nunca se usen
-\ - Ahora la luz tiene un pequeño retrazo en su prendido, dando la oportunidad de que los animales que
-\ alternen tengan una ventajita. Para cambiarlo, modificar la variable D.
-\ OJO, solo hay delay si se elije el perfil 3
-
-\ - Se eliminaron secciones comentadas que habia residuales de versiones anteriores, que no habian sido eliminadas antes por miedo a que sean utiles en el futturo
-\habiendo visto que la V2 anda re bien, me animé a tirarlas
-\
-\ Se crearon las marcas en matriz C  Z18 y Z19 que marcan los encendidos de las luces izq y der respectivamente.
-\y el contador B(3) que recopila la cantidad de elecciones de puertos hechas antes de que se llegue a prender la luz.
-
+\ DESCRIPTION:
+\ In the literature there are no operant conditioning tasks that evaluate competition between strategies. We set out to make one!
+\ A operant conditioning box with 2 nose-poke ports with asociated light is requiered.
+\ Only one port will be rewarded per trial. The rewarded port can be recognized because the light indicates it. 
+\ The light alternates right-left-right, in each trial. Therefore, two strategies lead to the reward: follow the light or adopt a "win-shift" strategy.
+\ Since the behavior of the animals do not indicate which strategy was chosen, a probe-test day is required to do so.
 
 \ Inputs
 ^LHOLE  = 1
