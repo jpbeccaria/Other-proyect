@@ -1,46 +1,17 @@
-\Protocolo de IMPILSIVIDAD. Basado en Fixed Ratio V6
-\
-\Cambios de la versión 2.0:
-\ Correción de los criterios de los Pause Time, Run Time, y Tiempo de latenica. Anteriormente, y de manera erronea, solo
-\avanzaban si se realizaba un nose poke en un puerto instantaneo, se corrigió de manera que lo haga con hociqueos en ambos puertos.
-\
-
-\*************************************************************************************
-\                     EXPLICACION DEL PROTOCOLO
-\************************************************************************************
-\
-
-\    Fijar mediante la variable A(0) cual hole será el conciderado instantaneo, siendo 1 el izquierdo y 2 el derecho.
-\De manera automática, el hole restante se asignará como hole delay (en términos del protocolo, E).
-\    En este momento se puede cambiar ademas la cantidad de pellets que entregará el hole delay (por defecto 5, cambiar modificando N,
-\tal como esta el protocolo escrito, 5 es el máximo); y si habrá o no delay (modificando la variable D, en segundos, por defecto 0!!!).
-\    Una vez seteado esto, y con los ratones dentro de la jaula, iniciar el experimento.
-\    Al iniciar la sesión, la caja mantendrá la luz general apagada, y la de ambos holes encendidas.
-\    Si el animal hace un nose poke en el hole prefijado como instantaneo, recibirá inmediatamente un pellet en el magazine hole.
-\Si el animal hace un NP el hole delay, recibira un nunero mayor de pellets (N).
-\    Ahora, el cuando reciba dichos pellets dependerá del deley colocado. Si se mantiene el 0, inmediatamente recibira los N pellets,
-\y mientras los recibe, en lo que dura esa acción por el aparato, se prende la luz de general de la jaula.
-\Este protocolo con deley 0 es usado para fomentar la preferencia de los animales por este hole, en las primeras seciones de impusividad.
-\    En cambio si se fija un delay mayor, la luz de la jaula se prenderá durante el tiempo que dure el delay, se recopilarán los NP que el raton
-\haga durante este retrazo (ver matriz B), pero dichos NP no tendran consecuencias. Pasado el delay, la luz general se apaga, y se entregan los pellets.
-\    Una vez entregada una recomenza, independientemente de si llegó por el hole inst. o delay y del delay elegido, ocurre un TO de 25 segundos
-\con prendido de la luz general. Nuevamente los NP que haga el animal durante este tiempo seran guardados, en posiciones diferentes de la matriz B que durante el delay. Este TO es muy importante. Con anterioridad observamos
-\que en su ausencia, los animales no tienden a preferir el hole que da mayor recompenza. En cambio si la decicion tomada tiene consecuencias a un mediano plazo,
-\como es el agregado de ester TO luego un NP, vimos que lleva a  un aumento en la preferencia del Hole delay.
-\    El protocolo dura 50 pellets o 60 minutos (ver matriz A en caso de querer modificarlo)
-\
-\
+\ Impulsivity protocol by Juan Pablo Beccaria
 
 
 \*************************************************************************************
-\             COSAS IMPORTANTES PARA CONFIGURAR EL PROTOCOLO!!
+\                                       DESCRIPTION
 \************************************************************************************
+\ Training phase consists of animals are train to develop a preference between two nose-poke holes,
+\ one is associated to 1 pellet of food, the other 5 pellets (It may be modified changing variable N, 5 by default). 
+\ When animals develop a preference, they are forced to modify their preference through a devaluation of the larger port.
+\ To do so a delay (D, 0 sec by default) between animal election and the delivery of their reward is introduced. Delay is increased every day of the delay phase.
+\ The difference between the percentage of choice of the largest port before and after the devaluation is a parameter for measuring impulsivity
 
-\    D es el delay entre que hace NP en el Hole que va a tener Delay y recibe la recompenza
-\Durante ese Delay, la luz de la caja esta prendida.
-\    N es el numero de recompenzas que recibe si hace NP en el Hole con delay
-\    A(0) INIDICA EL HOLE POR EL QUE VA A RECIBIR UNA RECOMPENZA INSTANTANEA!!!!! Por descarte,
-\ automaticamnte el otro sera el hole delay.
+\
+\
 
 
 \Basado en:
@@ -142,7 +113,7 @@ DIM C = 10000  \ Dimension Array C for 10001 data points.
 \  .11 = NP Delay                   ; naranja
 \  .12 = NP en Magazine hole        ; azul
 \  .13 = NPInst durante Delay       ; violeta
-\  .14 = NPDelay durante Delay      ; rojo oscuro/ bordó
+\  .14 = NPDelay durante Delay      ; rojo oscuro/ bordÃ³
 \  .15 = NPInst durante TO          ; amarillo amarronado
 \  .16 = NPDelay durante TO         ; celeste verdoso
 \
@@ -159,17 +130,17 @@ DIM C = 10000  \ Dimension Array C for 10001 data points.
 ^Z_HDelay     = 5   \ Signal Incorrect Response
 ^Z_EndTimeOut = 6   \ Signal End of Time Out
 
-^Z_TimeOutON  = 16  \ Señal de inicio del Time Out
-^Z_TimeOutOFF = 17  \ Señal de fin del Time Out
+^Z_TimeOutON  = 16  \ SeÃ±al de inicio del Time Out
+^Z_TimeOutOFF = 17  \ SeÃ±al de fin del Time Out
 ^Z_NPInstTO   = 18
 ^Z_NPDelayTO  = 19
 
 
-\ Z9  Señaliza cuando hace un NP instant durante el delay
-\ Z10 Señaliza cuando hace un NP delay durante el delay.
-\ Z12 Señaliza los Magazine pokes
+\ Z9  SeÃ±aliza cuando hace un NP instant durante el delay
+\ Z10 SeÃ±aliza cuando hace un NP delay durante el delay.
+\ Z12 SeÃ±aliza los Magazine pokes
 \ Z13 y Z14 Para graficar los deley en el SoftCR
-\ Z15 Señaliza recompenza proveniente de Hole delay para el SoftCR
+\ Z15 SeÃ±aliza recompenza proveniente de Hole delay para el SoftCR
 ^Z_End        = 32  \ Signal End of Session
 
 
