@@ -1,4 +1,4 @@
-# Stand-alone-Projects
+# Other proyects
  This repository contains pieces of work that I developed during my PhD.
  - It includes operant conditioning protocols in MEDSTATE NOTATION (a compilated language based on Pascal).
  
