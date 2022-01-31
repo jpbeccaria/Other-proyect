@@ -12,7 +12,7 @@ library("factoextra")
 
 setwd("C:/Users/bk_ri/Dropbox/Papaer JP OC/Datasets publicos")  # Escribir el directorio de trabajo usando "/" y no "\".
 
-matriz_tempD9 <- read_excel("data_display_dia4_2000ms.xlsx")    # abre el archivo excel para formar el dendrograma del día a analizar
+matriz_tempD9 <- read_excel("data_display_dia4_2000ms.xlsx")    # abre el archivo excel para formar el dendrograma del dÃ­a a analizar
 
 
 matriz <-as.matrix(matriz_tempD9)
@@ -60,7 +60,7 @@ fviz_nbclust(matriz, hcut, method = "silhouette")+
 
 #################################
 
-# MÉTODO GAP STATISTIC #
+# MÃ‰TODO GAP STATISTIC #
 
 #################################
 
