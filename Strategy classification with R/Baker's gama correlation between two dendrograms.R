@@ -68,7 +68,7 @@ the_cor2<-cor_bakers_gamma(dend1, dend2)
 #round(sum(the_cor2 < cor_bakers_gamma_results)/ R, 4)
 
 
-# Datos del bootstrap; R = número de repeticiones. Es bastante rápido, se puede subir de 100 si se quiere.
+# Datos del bootstrap; R = nÃºmero de repeticiones. Es bastante rÃ¡pido, se puede subir de 100 si se quiere.
 
 set.seed(23801)
 
