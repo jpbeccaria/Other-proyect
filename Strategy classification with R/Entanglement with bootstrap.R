@@ -52,7 +52,7 @@ tanglegram(dend1, dend2, common_subtrees_color_branches = TRUE)
 lista <- dendlist(dend1, dend2)
 
 
-# Se aplica un método de untangle. Por defecto es "2 steps". Por lo que googlíe es el "mejor"
+# Se aplica un mÃ©todo de untangle. Por defecto es "2 steps". Por lo que googlÃ­e es el "mejor"
 # hace todas las combinaciones PERMITIDAS de giros de nodos hasta que encuientra el entanglement mas chico
 
 # dends_15_51 %>% untangle(method = "DendSer") %>% entanglement # lower is better
@@ -79,13 +79,13 @@ matriz_tempD9 <- read_excel("dia9_c_3cp_3v.xlsx")    # abre el archivo excel
 matrizD9 <-as.matrix(matriz_tempD9)
 
 
-# Si acá se cambia el archivo que se lee, se puede ir cambiando las parejas que se comparan.
+# Si acÃ¡ se cambia el archivo que se lee, se puede ir cambiando las parejas que se comparan.
 
 
 matriz_tempD1 <- read_excel("dia2_c.xlsx")    # abre el archivo excel
 matrizD1 <-as.matrix(matriz_tempD1)
 
-# Acá se arma y plotean los dendogramas, lo dejé porque es un "control" de que se cargaron bien los archivos.
+# AcÃ¡ se arma y plotean los dendogramas, lo dejÃ© porque es un "control" de que se cargaron bien los archivos.
 
 
 res.distD9 <- dist(matrizD9, method = "euclidean")
@@ -106,8 +106,8 @@ plot(dend1)
 dend2 <- as.dendrogram (hcD1)
 plot(dend2)
 
-# Aca se setea lo necesario para el bootstrap, número de repeticiones, R = número de repeticiones.
-# Se predefine R=10 porque lleva bastante tiempo, idealmente se podría subir.
+# Aca se setea lo necesario para el bootstrap, nÃºmero de repeticiones, R = nÃºmero de repeticiones.
+# Se predefine R=10 porque lleva bastante tiempo, idealmente se podrÃ­a subir.
 
 
 R <- 10
